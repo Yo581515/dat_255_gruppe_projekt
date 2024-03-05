@@ -1,0 +1,73 @@
+<style>
+    .modal-content {
+        background-color: #212121
+    }
+</style>
+
+<!-- More Info -->
+<div class="modal fade" id="Modal-MoreInfo-{{ task.id }}"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">
+                    <!-- -->
+                    {{ task.task_name }}
+                </h5>
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ task.task_description }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Task -->
+<div class="modal fade" id="Modal-DeleteConfirm-{{ task.id }}"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">
+                    <!-- -->
+                    {{ task.task_name }}
+                </h5>
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                {{ delete_task_form.hidden_tag() }}
+                <input type="hidden" name="form_name" value="delete_task_form">
+                <h4 class="text-center">
+                    Are you sure you want to delete this task: {{ task.task_name }} ?
+                </h4>
+                <br>
+                <h6 class="text-center">
+                    By clicking delete, you will delete this task.
+                </h6>
+                <br>
+                <input id="deleted_task" name="deleted_task" type="hidden" value="{{ task.id }}">
+                {{ delete_task_form.submit(class="btn btn-outline-success btn-block") }}
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
