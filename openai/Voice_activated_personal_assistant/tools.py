@@ -7,7 +7,7 @@ create_file_function = {
             "properties": {
                 "file_name": {
                     "type": "string",
-                    "description": "The name of the file to be created"
+                    "description": "The name of the file to be created, Dont create the file if i didnt use the word create file"
                 },
                 "content": {
                     "type": "string",

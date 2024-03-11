@@ -3,7 +3,7 @@ import os
 
 def create_text_file(file_name, content=""):
     try:
-        with open(file_name + ".txt", 'x') as file:
+        with open(file_name, 'x') as file:
             file.write(content)
         return "file created successfully."
     except Exception as e:
@@ -33,5 +33,4 @@ def delete_all_txt_files():
 
 
 def finish_conversation(value=False):
-
     return not value

@@ -73,7 +73,7 @@ class Assistant():
 
             match name:
                 case "create_text_file":
-                    response = fh.create_text_file(arguments['file_name'], arguments.get('content', ''))
+                    response = fh.create_text_file(str(arguments['file_name']), str(arguments.get('content', '')))
                 case "delete_file":
                     response = fh.delete_file(arguments['file_name'])
                 case "delete_all_txt_files":
@@ -95,7 +95,7 @@ class Assistant():
                 ],
             )
 
-        self.wait_on_run(run, self.thread)
+        run = self.wait_on_run(run, self.thread)
         # print("waited on run 2", run.status)
 
         messages = self.client.beta.threads.messages.list(

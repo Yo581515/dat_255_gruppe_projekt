@@ -53,8 +53,6 @@ def live_recording(wait_time=30):
                 print("Transcription:", result['text'])
                 frames = []
 
-
-
             if recording:
                 frames.append(data)
                 # sounddevice.RawStream
