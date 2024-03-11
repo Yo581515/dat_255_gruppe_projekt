@@ -61,6 +61,7 @@ def live_recording(threshold=0.001, silence_wait_time=30):
         my_assistant.dissconnect_assistant()
         print("\nExiting.")
     finally:
+        my_assistant.dissconnect_assistant()
         stream.stop_stream()
         stream.close()
         p.terminate()
