@@ -3,6 +3,7 @@ import datetime
 import json
 import pytz
 
+from api_requests import local_time_and_air_temperature
 
 
 def create_text_file(file_name, content=""):
@@ -41,7 +42,6 @@ def finish_conversation(value=False):
 
 
 def date_time_now():
-
     # Define Norway's timezone
     norway_timezone = pytz.timezone('Europe/Oslo')
 
@@ -69,6 +69,20 @@ def date_time_now():
     # Convert to JSON string
     json_string = json.dumps(date_info, indent=4)
 
-    print(json_string)
+    # print(json_string)
 
     return json_string
+
+
+def local_temperature_info():
+    current_time_info = date_time_now()
+    forcast_data = local_time_and_air_temperature()
+
+    my_location_weather_wather_info = {
+        "current_time_info": current_time_info,
+        "forcast_data": forcast_data
+    }
+
+    # print(my_location_weather_wather_info)
+
+    return my_location_weather_wather_info

@@ -1,3 +1,7 @@
+code_interpreter = {
+    "type": "code_interpreter"
+}
+
 create_file_function = {
     "type": "function",
     "function": {
@@ -69,6 +73,20 @@ date_time_now_function = {
     "type": "function",
     "function": {
         "name": "date_time_now",
+        "description": "This function returns the local current date and time information. dont be very specific, just use the needed information",
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": []
+        }
+    }
+}
+
+local_temperature_info = {
+    "type": "function",
+    "function": {
+        "name": "local_temperature_info",
+        "description": "This function returns the local forcast temperature information.",
         "parameters": {
             "type": "object",
             "properties": {},

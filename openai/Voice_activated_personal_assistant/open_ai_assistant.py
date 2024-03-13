@@ -15,8 +15,9 @@ class Assistant():
             api_key=os.getenv("OPENAI_API_KEY")
         )
 
-        self.tools = [tls.create_file_function, tls.delete_file_function,
-                      tls.delete_all_txt_files_function, tls.finish_conversation_function, tls.date_time_now_function]
+        self.tools = [tls.code_interpreter,tls.create_file_function, tls.delete_file_function,
+                      tls.delete_all_txt_files_function, tls.finish_conversation_function, tls.date_time_now_function
+            , tls.local_temperature_info]
 
         self.assistant = self.client.beta.assistants.create(
             name="file_handler_bot",
@@ -83,6 +84,8 @@ class Assistant():
                     response = "Goodbye!"
                 case "date_time_now":
                     response = fh.date_time_now()
+                case "local_temperature_info":
+                    response = fh.local_temperature_info()
                 case _:
                     response = "I'm sorry, I don't understand that command."
 
