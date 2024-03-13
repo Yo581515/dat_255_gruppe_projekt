@@ -37,3 +37,12 @@ class Task(db.Model):
 
     def __repr__(self):
         return f'Task {self.task_name}'
+
+    def to_dict(self):
+        """Convert the Task object into a serializable dictionary."""
+        return {
+            "id": self.id,
+            "name": self.task_name,
+            "description": self.task_description,
+            # add other fields as necessary
+        }

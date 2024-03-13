@@ -3,14 +3,19 @@ from flask import Flask
 from sqlalchemy.exc import IntegrityError
 from .extensions import db, bcrypt, login_manager
 from .models import Task, User
+from flask_cors import CORS
+
 
 def create_app():
     app = Flask(__name__)
+    # CORS(app, supports_credentials=True)
+    CORS(app)
 
     # Database configuration
     basedir = os.path.abspath(os.path.dirname(__file__))
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'task.db')
     app.config['SECRET_KEY'] = '00ec9f02962c52e7e0a2ad71'
+    # app.config['CORS_HEADERS'] = 'Content-Type'
 
     db.init_app(app)
     bcrypt.init_app(app)
