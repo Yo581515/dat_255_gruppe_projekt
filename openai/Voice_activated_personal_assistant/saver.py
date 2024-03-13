@@ -1,4 +1,4 @@
-import time
+'''import time
 
 import numpy as np
 import pyaudio
@@ -62,3 +62,4 @@ def live_recording(threshold=0.001, silence_wait_time=30):
 
 
 live_recording()
+'''

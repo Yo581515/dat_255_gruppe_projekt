@@ -64,3 +64,15 @@ finish_conversation_function = {
         }
     }
 }
+
+date_time_now_function = {
+    "type": "function",
+    "function": {
+        "name": "date_time_now",
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": []
+        }
+    }
+}

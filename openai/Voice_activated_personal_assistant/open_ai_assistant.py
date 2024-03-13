@@ -1,7 +1,7 @@
 import json
 from openai import OpenAI
-import file_handler as fh
-import tools as tl
+import functions as fh
+import function_tools as tls
 import os
 import time
 from dotenv import load_dotenv
@@ -15,12 +15,12 @@ class Assistant():
             api_key=os.getenv("OPENAI_API_KEY")
         )
 
-        self.tools = [tl.create_file_function, tl.delete_file_function,
-                      tl.delete_all_txt_files_function, tl.finish_conversation_function]
+        self.tools = [tls.create_file_function, tls.delete_file_function,
+                      tls.delete_all_txt_files_function, tls.finish_conversation_function, tls.date_time_now_function]
 
         self.assistant = self.client.beta.assistants.create(
             name="file_handler_bot",
-            instructions="You help manage creating and deleting files in a directory. You can create a file, delete a file, or delete all txt files in the directory.",
+            instructions="You help manage creating and deleting files in a directory. You can create a file, delete a file, or delete all txt files in the directory. Keep responses under 20 words.",
             tools=self.tools,
             model="gpt-3.5-turbo"
         )
@@ -81,6 +81,8 @@ class Assistant():
                 case "finish_conversation":
                     continue_conversation = fh.finish_conversation(arguments['value'])
                     response = "Goodbye!"
+                case "date_time_now":
+                    response = fh.date_time_now()
                 case _:
                     response = "I'm sorry, I don't understand that command."
 

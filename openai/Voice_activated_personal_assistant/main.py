@@ -21,7 +21,13 @@ def live_recording(threshold=0.001, silence_wait_time=30):
     WAIT_FRAMES = silence_wait_time
 
     p = pyaudio.PyAudio()
-    stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+    stream = p.open(
+        format=FORMAT,
+        channels=CHANNELS,
+        rate=RATE,
+        input=True,
+        frames_per_buffer=CHUNK
+    )
 
     frames = []
     recording = False
@@ -55,7 +61,7 @@ def live_recording(threshold=0.001, silence_wait_time=30):
                     print("Response:\n", response)
                     engine.say(response)
                     engine.runAndWait()
-                    time.sleep(4)
+                    time.sleep(1)
                     frames = []  # Reset frames after processing
     except KeyboardInterrupt:
         my_assistant.dissconnect_assistant()
