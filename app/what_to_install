@@ -6,3 +6,5 @@ pip install flask-sqlalchemy
 pip install Flask-Login
 pip install email_validator
 pip install flask-wtf
+pip install Flask-CORS
+
