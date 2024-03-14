@@ -195,7 +195,8 @@ export default class extends HTMLElement {
             "headers": {"Content-Type": "application/json; charset=utf-8"},
             "body": JSON.stringify(task),
             "cache": "no-cache",
-            "redirect": "error"
+            "redirect": "error",
+            credentials: 'include'
         };
 
         try {
@@ -203,6 +204,8 @@ export default class extends HTMLElement {
             const url = `http://127.0.0.1:5000/delete_task/${taskId}`;
 
             console.log(url);
+            // const response = await fetch(url, {method: "GET", credentials: 'include'}); // Ensure cookies are sent
+
 
             const response = await fetch(url, requestSettings);
             if (response.ok) {

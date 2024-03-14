@@ -4,13 +4,14 @@ export default class extends HTMLElement {
     #changeStatusCallback;
     #deleteCallback;
     #tbodyElm = null;
+
     constructor() {
         // Always call super first in constructor
         super();
 
         // Entry point to the shadow DOM
         // If open, property "shadowRoot" will be an outside entrance to the shadow DOM
-        this.#shadow = this.attachShadow({ mode: 'closed' });
+        this.#shadow = this.attachShadow({mode: 'closed'});
 
         // Fetching the template element
         const task_list_Template = document.getElementById("task-list");
@@ -163,8 +164,6 @@ export default class extends HTMLElement {
         });
         row.cells[deleteIndeks].appendChild(bt);
     }
-
-
 
 
     #changestatus(id, newStatus) {

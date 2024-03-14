@@ -104,7 +104,7 @@ def get_all_tasks():
     return jsonify(tasks_list)
 
 
-@app.route('/delete_task', methods=['POST'])
+@app.route('/delete_task/<task_id>', methods=['POST', 'DELETE'])
 @login_required
 def delete_task(task_id):
     print('delete_task: Current user:', current_user)
