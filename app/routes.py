@@ -115,7 +115,7 @@ def delete_task(task_id):
         db.session.delete(task)
         db.session.commit()
 
-        return jsonify(task.to_dict())
+        return task.to_dict()
     except:
         db.session.rollback()
         return jsonify({'message': 'Error deleting task!'}), 500

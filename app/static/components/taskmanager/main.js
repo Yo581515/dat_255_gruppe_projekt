@@ -190,51 +190,36 @@ export default class extends HTMLElement {
 
 
     async #deleteTask(taskId) {
-        const task = {
-            "id": taskId
-        };
-        console.log("deleting: ")
-        console.log(taskId)
+    const task = {
+        "id": taskId
+    };
 
-        let requestSettings = {
-            "method": "DELETE",
-            "headers": {"Content-Type": "application/json; charset=utf-8"},
-            "body": JSON.stringify(task),
-            "cache": "no-cache",
-            "redirect": "error",
-            credentials: 'include'
-        };
+    let requestSettings = {
+        "method": "DELETE",
+        "headers": {"Content-Type": "application/json; charset=utf-8"},
+        "body": JSON.stringify(task),
+        "cache": "no-cache",
+        "redirect": "error",
+        credentials: 'include'
+    };
 
-        try {
+    try {
+        const url = `http://127.0.0.1:5000/delete_task/${taskId}`;
+        const response = await fetch(url, requestSettings);
 
-            const url = `http://127.0.0.1:5000/delete_task/${taskId}`;
-
-            console.log(url);
-            // const response = await fetch(url, {method: "GET", credentials: 'include'}); // Ensure cookies are sent
-
-
-            const response = await fetch(url, requestSettings);
-            if (response.ok) {
-                const object = await response.json();
-                if (typeof object.responseStatus != "undefined") {
-                    if (object.responseStatus) {
-                        const tasklist = this.#shadow.querySelector('task-list');
-                        tasklist.removeTask(object.id);
-                    } else {
-                        console.log(2)
-
-                        console.log("Could not connect to server");
-                    }
-                } else {
-                    console.log(2)
-                    console.log("Could not connect to server");
-                }
-            }
-        } catch (e) {
-            console.log(e);
-            console.log("Could not connect to server");
+        if (response.ok) {
+            // If the response is OK, the task was successfully deleted
+            const object = await response.json(); // Assuming task.to_dict() is JSON-serializable
+            const tasklist = this.#shadow.querySelector('view-content');
+            tasklist.removeTask(object.id);
+        } else {
+            // Handle non-OK responses
+            const error = await response.json();
+            console.error("Error deleting task:", error.message);
         }
+    } catch (e) {
+        console.error("Could not connect to server", e);
     }
-
+}
 
 }

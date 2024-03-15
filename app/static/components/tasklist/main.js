@@ -223,7 +223,9 @@ export default class extends HTMLElement {
         if (this.#tbodyElm != null) {
             const row = this.#tbodyElm.querySelector(`tr[data-taskid="${id}"]`);
             //            console.log(row);
-            this.#tbodyElm.removeChild(row);
+            if (row != null) {
+                this.#tbodyElm.removeChild(row);
+            }
 
         }
         if (this.#tbodyElm != null && this.#tbodyElm.rows.length == 0) {
