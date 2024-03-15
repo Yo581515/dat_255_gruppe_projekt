@@ -21,7 +21,7 @@ class Assistant():
 
         self.assistant = self.client.beta.assistants.create(
             name="file_handler_bot",
-            instructions="You help manage creating and deleting files in a directory. You can create a file, delete a file, or delete all txt files in the directory. Keep responses under 20 words.",
+            instructions="You help manage creating and deleting files in a directory. You can create a file, delete a file, or delete all txt files in the directory. Keep responses under 30 words.",
             tools=self.tools,
             model="gpt-3.5-turbo"
         )

@@ -16,9 +16,11 @@ def home_page():
 @app.route('/tasks', methods=['GET', 'POST'])
 @login_required
 def tasks_page():
-    print('tasks_page: Current user:', current_user)
     return render_template('tasks2.html')
-    print(type(tasks))
+    print('tasks_page: Current user:', current_user)
+    tasks = Task.query.filter_by(owner=current_user.id).all()  # Ensure this is a list, even if empty
+
+    #print(type(tasks))
     delete_task_form = DeleteTaskForm()
     add_task_form = AddTaskForm()
     print("add_task_form:", add_task_form.task_name.data)
