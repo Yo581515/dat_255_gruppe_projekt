@@ -22,7 +22,7 @@ export default class extends HTMLElement {
         this.#shadow.appendChild(task_list_Content);
 
         // Add a style element to shadow DOM that includes Bootstrap and custom styles
-        //const style = document.createElement('style');
+        const style = document.createElement('style');
         style.textContent = `
         @import url('https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css');
 

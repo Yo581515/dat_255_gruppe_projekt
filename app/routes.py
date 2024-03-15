@@ -20,7 +20,7 @@ def tasks_page():
     print('tasks_page: Current user:', current_user)
     tasks = Task.query.filter_by(owner=current_user.id).all()  # Ensure this is a list, even if empty
 
-    #print(type(tasks))
+    # print(type(tasks))
     delete_task_form = DeleteTaskForm()
     add_task_form = AddTaskForm()
     print("add_task_form:", add_task_form.task_name.data)
@@ -111,8 +111,11 @@ def get_all_tasks():
 def delete_task(task_id):
     print('delete_task: Current user:', current_user)
     task = Task.query.filter_by(id=task_id).first()
-    if task:
+    try:
         db.session.delete(task)
         db.session.commit()
-        return True
-    return False
+
+        return jsonify(task.to_dict())
+    except:
+        db.session.rollback()
+        return jsonify({'message': 'Error deleting task!'}), 500

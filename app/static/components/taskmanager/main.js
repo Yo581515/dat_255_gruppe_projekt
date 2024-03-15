@@ -35,6 +35,12 @@ export default class extends HTMLElement {
         console.log("before getTaskList");
         this.#getTaskList();
 
+        const task_example = {
+            'id': 11111111111,
+            'name': 'example name 11111111111',
+            'description': 'example description 11111111111'
+        }
+        tasklist.showTask(task_example);
 
         //        const status = {
         //            "id": 1,
@@ -215,13 +221,17 @@ export default class extends HTMLElement {
                         const tasklist = this.#shadow.querySelector('task-list');
                         tasklist.removeTask(object.id);
                     } else {
+                        console.log(2)
+
                         console.log("Could not connect to server");
                     }
                 } else {
+                    console.log(2)
                     console.log("Could not connect to server");
                 }
             }
         } catch (e) {
+            console.log(e);
             console.log("Could not connect to server");
         }
     }
