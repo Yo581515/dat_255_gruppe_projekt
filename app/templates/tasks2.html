@@ -6,62 +6,40 @@
 
     <div class="row" style="margin-top:20px; margin-left:20px">
         <div class="col-8">
-            {#           {% include 'includes/add_task_model.html' %}
-            <h2>This are your tasks</h2>
-            <button class="btn btn-outline btn-success" data-toggle="modal"
-                    data-target="#Modal-AddTask">Add Task
-            </button>#}
-            <br>
+
+
             <VIEW-WRAPPER>
+
                 <!--     The task list -->
                 <!--    <TASK-ADD></TASK-ADD>-->
                 <!--    <VIEW-CONTENT></VIEW-CONTENT>-->
             </VIEW-WRAPPER>
+            <br>
+
             <template id="task-list">
                 <div id="wrapper">
                 </div>
             </template>
             <template id="table-template">
-                <style>
-                    table {
-                        font-family: arial, sans-serif;
-                        border-collapse: collapse;
-                        width: 35%;
-                    }
+                {# {% include 'includes/add_task_model2.html' %}#}
+                {#   <h2>This are your tasks</h2>
+                <button class="btn btn-outline btn-success" data-toggle="modal"
+                        data-target="#Modal-AddTask">Add Task
+                </button>#}
 
-                    td,
-                    th {
-                        border: 1px solid #dddddd;
-                        text-align: left;
-                        padding: 8px;
-                    }
-                </style>
                 <table class="table table-hover table-dark">
                     <thead>
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">task</th>
-                        <th scope="col">status</th>
+                        <th scope="col">description</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <!--                <tr>-->
-                    <!--                    <td id="id"></td>-->
-                    <!--                    <td id="title"></td>-->
-                    <!--                    <td id="status"></td>-->
-                    <!--                    <td id="selector">-->
-                    <!--                        <select name="statuses" id="status-select">-->
-                    <!--                            <option value="">--Modify--</option>-->
-                    <!--                            <option value="ACTIVE">ACTIVE</option>-->
-                    <!--                            <option value="WAITING">WAITING</option>-->
-                    <!--                            <option value="DONE">DONE</option>-->
-                    <!--                        </select>-->
-                    <!--                    </td>-->
-                    <!--                    <td id="remover" data-value=""> <button type="button">remove</button>-->
-                    <!--                    </td>-->
-                    <!--                </tr>-->
+
                     </tbody>
                 </table>
+
             </template>
         </div>
         <div class="col-4">
@@ -69,5 +47,6 @@
             <p>Click on sell task to put an task back on the Market</p>
             <br>
         </div>
+    </div>
     </div>
 {% endblock %}

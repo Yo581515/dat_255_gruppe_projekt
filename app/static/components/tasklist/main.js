@@ -4,6 +4,7 @@ export default class extends HTMLElement {
     #changeStatusCallback;
     #deleteCallback;
     #tbodyElm = null;
+    #cssfile = "main.css";
 
     constructor() {
         // Always call super first in constructor
@@ -12,6 +13,7 @@ export default class extends HTMLElement {
         // Entry point to the shadow DOM
         // If open, property "shadowRoot" will be an outside entrance to the shadow DOM
         this.#shadow = this.attachShadow({mode: 'closed'});
+        this.#createLink();
 
         // Fetching the template element
         const task_list_Template = document.getElementById("task-list");
@@ -19,9 +21,43 @@ export default class extends HTMLElement {
         const task_list_Content = task_list_Template.content.cloneNode(true);
         this.#shadow.appendChild(task_list_Content);
 
+        // Add a style element to shadow DOM that includes Bootstrap and custom styles
+        //const style = document.createElement('style');
+        style.textContent = `
+        @import url('https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css');
+
+        body {
+            background-color: #212121;
+            color: white;
+        }
+        table {
+            display: block;
+            width: 100%;
+        }
+        /* Include additional styles if necessary */
+        `;
+
+        // Append the style to the shadow DOM before appending the table
+        //this.#shadow.appendChild(style);
 
     }
 
+    #createLink() {
+        const link = document.createElement('link');
+
+        /**
+         * Use directory of script as directory of CSS file
+         * Observe, 'import.meta' is not yet part of the web standard.
+         * At current, it is in stage 4 of the TC39 process.
+         * See https://github.com/tc39/proposal-import-meta
+         * All major current browseres do support import.meta
+         **/
+        const path = import.meta.url.match(/.*\//)[0];
+        link.href = path.concat(this.#cssfile);
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        this.#shadow.appendChild(link);
+    }
 
     changestatusCallback(f) {
         this.#changeStatusCallback = f;
@@ -95,10 +131,13 @@ export default class extends HTMLElement {
         //        set erIdMed til 0 hvis du skall ha med id paa tabellen
         row.cells[erIdMed].id = id;
         row.cells[erIdMed].textContent = id;
+        row.cells[erIdMed].style.verticalAlign = 'middle';
+
 
         const titelIndeks = 1 - erIdMed;
         row.cells[titelIndeks].id = "task_name";
         row.cells[titelIndeks].textContent = task_name;
+        row.cells[titelIndeks].style.verticalAlign = 'middle';
 
         const statusIndeks = 2 - erIdMed;
         row.cells[statusIndeks].id = "task_description";
@@ -154,6 +193,7 @@ export default class extends HTMLElement {
         const bt = document.createElement("button");
         bt.type = "button";
         bt.textContent = "Remove";
+        bt.classList.add("btn", "btn-outline", "btn-success");
         //        eventLitsener for remove button
         bt.addEventListener("click", () => {
             const vilDusletteTasken = confirm(`delete task  '${task_name}'?`);
@@ -163,6 +203,8 @@ export default class extends HTMLElement {
             }
         });
         row.cells[deleteIndeks].appendChild(bt);
+        row.cells[deleteIndeks].style.verticalAlign = 'middle';
+
     }
 
 

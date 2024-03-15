@@ -1,5 +1,5 @@
 #wrapper {
-    display: grid;
-    grid-template-columns: repeat(2, max-content);
+    display: block;
+    grid-template-columns: repeat(1, max-content);
     grid-gap: 10px;
 }
