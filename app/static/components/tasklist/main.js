@@ -5,6 +5,7 @@ export default class extends HTMLElement {
     #deleteCallback;
     #tbodyElm = null;
     #cssfile = "main.css";
+    #deleteTaskModal = "delete_task_modal.html";
 
     constructor() {
         // Always call super first in constructor
@@ -20,27 +21,22 @@ export default class extends HTMLElement {
         // Copying the template content into a new document
         const task_list_Content = task_list_Template.content.cloneNode(true);
         this.#shadow.appendChild(task_list_Content);
-
-        // Add a style element to shadow DOM that includes Bootstrap and custom styles
-        const style = document.createElement('style');
-        style.textContent = `
-        @import url('https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css');
-
-        body {
-            background-color: #212121;
-            color: white;
-        }
-        table {
-            display: block;
-            width: 100%;
-        }
-        /* Include additional styles if necessary */
-        `;
-
-        // Append the style to the shadow DOM before appending the table
-        //this.#shadow.appendChild(style);
+        // this.loadAndAppendModal();
 
     }
+
+ /*   async loadAndAppendModal() {
+        /!*const modal_dir_path = import.meta.url.match(/.*\//)[0];
+        const modal_path = modal_dir_path.concat(this.#deleteTaskModal);*!/
+
+        const modalPath = new URL(this.#deleteTaskModal, import.meta.url);
+        const response = await fetch(modalPath);
+        const modalHtml = await response.text();
+
+        // Append the modal HTML to the shadow DOM
+        this.#shadow.innerHTML += modalHtml;
+    }*/
+
 
     #createLink() {
         const link = document.createElement('link');
@@ -58,6 +54,16 @@ export default class extends HTMLElement {
         link.type = "text/css";
         this.#shadow.appendChild(link);
     }
+
+    async loadAndAppendModal() {
+        const modalPath = new URL(this.#deleteTaskModal, import.meta.url);
+        const response = await fetch(modalPath);
+        const modalHtml = await response.text();
+
+        // Append the modal HTML to the shadow DOM
+        this.#shadow.innerHTML += modalHtml;
+    }
+
 
     changestatusCallback(f) {
         this.#changeStatusCallback = f;
@@ -195,7 +201,11 @@ export default class extends HTMLElement {
         bt.textContent = "Remove";
         bt.classList.add("btn", "btn-outline", "btn-success");
         //        eventLitsener for remove button
+
+        // bt ius the Button do delete a task
+
         bt.addEventListener("click", () => {
+
             const vilDusletteTasken = confirm(`delete task  '${task_name}'?`);
             if (vilDusletteTasken) {
                 this.#deleteTask(deleteId)
@@ -206,6 +216,7 @@ export default class extends HTMLElement {
         row.cells[deleteIndeks].style.verticalAlign = 'middle';
 
     }
+
 
 
     #changestatus(id, newStatus) {
