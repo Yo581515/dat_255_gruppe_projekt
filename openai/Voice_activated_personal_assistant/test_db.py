@@ -11,11 +11,11 @@ db.init_app(app)
 with app.app_context():
     try:
         test_task = Task(task_name='clean the dishes', task_description="if i don't clean the dishes, i will be in "
-                                                                        "trouble.", owner=4)
+                                                                        "trouble.", owner=2)
         db.session.add(test_task)
         db.session.commit()
 
-        test_task2 = Task(task_name='Read Fastai fast', task_description="i should read fastai very fast", owner=4)
+        test_task2 = Task(task_name='Read Fastai fast', task_description="i should read fastai very fast", owner=2)
         db.session.add(test_task2)
         db.session.commit()
 
@@ -31,7 +31,7 @@ with app.app_context():
                                                                           "Excepteur sint occaecat cupidatat non "
                                                                           "proident, sunt in culpa qui officia "
                                                                           "deserunt mollit anim id est laborum.",
-                          owner=4)
+                          owner=2)
         db.session.add(test_task2)
         db.session.commit()
     except:
