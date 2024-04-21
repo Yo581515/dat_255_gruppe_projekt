@@ -2,10 +2,10 @@ import time
 
 import numpy as np
 import pyaudio
-import librosa
 import whisper
 from open_ai_assistant import Assistant
 import pyttsx3
+import librosa
 
 engine = pyttsx3.init()
 
@@ -59,6 +59,7 @@ def live_recording(threshold=0.001, silence_wait_time=30):
                     response, continue_listening = my_assistant.send_message(result['text'])
                     print("continue_listening:", continue_listening)
                     print("Response:\n", response)
+                    
                     engine.say(response)
                     engine.runAndWait()
                     time.sleep(1)

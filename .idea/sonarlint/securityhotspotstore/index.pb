@@ -1,0 +1,15 @@
+
+a
+1openai/Voice_activated_personal_assistant/main.py,4\e\4e6c060b68899709881d6501d04dd67a643bb980
+k
+;openai/Voice_activated_personal_assistant/function_tools.py,8\1\81882f92adc8e518dab5a9d9becca6d2aaba62fa
+n
+>openai/Voice_activated_personal_assistant/open_ai_assistant.py,5\e\5e16c4e480dabaf2c322217959706b3be0422f2f
+f
+6openai/Voice_activated_personal_assistant/functions.py,7\d\7d7d6835f26deb7100e46f6163423fc4178aebf7
+i
+9openai/Voice_activated_personal_assistant/api_requests.py,a\2\a289d7603bba324ca16b8638ca714124680b8f9e
+g
+7openai/Voice_activated_personal_assistant/reminders.txt,c\8\c89110b5ece18b7634fd96b4158fb839f190a510
+p
+@openai/Voice_activated_personal_assistant/packages_to_install.py,d\5\d52a6f2c140ed9fcbc058921642e3d032e38bfab

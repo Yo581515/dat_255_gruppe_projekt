@@ -2,52 +2,56 @@ code_interpreter = {
     "type": "code_interpreter"
 }
 
-create_file_function = {
-    "type": "function",
-    "function": {
-        "name": "create_text_file",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "file_name": {
-                    "type": "string",
-                    "description": "The name of the file to be created, Dont create the file if i didnt use the word create file"
-                },
-                "content": {
-                    "type": "string",
-                    "description": "The content to write inside the file. Defaults to an empty string if not provided."
-                }
-            },
-            "required": ["file_name"]
-        }
-    }
-}
 
-delete_file_function = {
+list_reminders_function = {
     "type": "function",
     "function": {
-        "name": "delete_file",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "file_name": {
-                    "type": "string",
-                    "description": "The name of the file to be deleted"
-                }
-            },
-            "required": ["file_name"]
-        }
-    }
-}
-
-delete_all_txt_files_function = {
-    "type": "function",
-    "function": {
-        "name": "delete_all_txt_files",
+        "name": "list_reminders",
         "parameters": {
             "type": "object",
             "properties": {},
             "required": []
+        },
+        "description": "Lists all reminders stored in the reminders.txt file, formatted as a single string. runs before"
+                       "each delete reminder function call to show the current reminders."
+    }
+}
+
+
+
+
+
+remover_reminder_function = {
+    "type": "function",
+    "function": {
+        "name": "remove_reminder",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "reminder_text": {
+                    "type": "string",
+                    "description": "The text of the reminder to remove."
+                                   "runs after list_reminders to show the current reminders."
+                }
+            },
+            "required": ["reminder_text"]
+        }
+    }
+}
+
+add_reminder_function = {
+    "type": "function",
+    "function": {
+        "name": "add_reminder",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "reminder_text": {
+                    "type": "string",
+                    "description": "The text of the reminder to add."
+                }
+            },
+            "required": ["reminder_text"]
         }
     }
 }

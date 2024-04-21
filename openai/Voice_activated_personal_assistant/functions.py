@@ -5,36 +5,29 @@ import pytz
 
 from api_requests import local_time_and_air_temperature
 
-
-def create_text_file(file_name, content=""):
-    try:
-        with open(file_name, 'x') as file:
-            file.write(content)
-        return "file created successfully."
-    except Exception as e:
-        return f"An error occurred: {e}"
+def add_reminder(reminder_text):
+    """Add a reminder to the reminders.txt file."""
+    with open("reminders.txt", "a") as file:
+        file.write(reminder_text + "\n")
 
 
-def delete_file(file_name):
-    try:
-        if os.path.exists(file_name):
-            os.remove(file_name)
-            return f"File '{file_name}' has been deleted."
-        else:
-            return f"File '{file_name}' does not exist."
-    except Exception as e:
-        return f"An error occurred: {e}"
+def remove_reminder(reminder_text):
+    """Remove a reminder from the reminders.txt file."""
+    with open("reminders.txt", "r") as file:
+        lines = file.readlines()
+
+    with open("reminders.txt", "w") as file:
+        for line in lines:
+            if line.strip("\n") != reminder_text:
+                file.write(line)
 
 
-def delete_all_txt_files():
-    try:
-        for file_name in os.listdir():
-            if file_name.endswith('.txt'):
-                os.remove(file_name)
-                print(f"File '{file_name}' has been deleted.")
-        return "All txt files have been deleted."
-    except Exception as e:
-        return f"An error occurred: {e}"
+def list_reminders():
+    """List all reminders in the reminders.txt file."""
+    with open("reminders.txt", "r") as file:
+        reminders = file.readlines()
+
+    return str(reminders)
 
 
 def finish_conversation(value=False):
@@ -86,3 +79,10 @@ def local_temperature_info():
     # print(my_location_weather_wather_info)
 
     return my_location_weather_wather_info
+
+if __name__ == "__main__":
+    # Test the functions
+    l = list_reminders()
+    print(l)
+    print(type(l))
+    pass

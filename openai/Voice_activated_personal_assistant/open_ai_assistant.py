@@ -15,15 +15,15 @@ class Assistant():
             api_key=os.getenv("OPENAI_API_KEY")
         )
 
-        self.tools = [tls.code_interpreter,tls.create_file_function, tls.delete_file_function,
-                      tls.delete_all_txt_files_function, tls.finish_conversation_function, tls.date_time_now_function
+        self.tools = [tls.code_interpreter, tls.add_reminder_function, tls.remover_reminder_function,tls.list_reminders_function,
+                      tls.finish_conversation_function, tls.date_time_now_function
             , tls.local_temperature_info]
 
         self.assistant = self.client.beta.assistants.create(
             name="file_handler_bot",
-            instructions="You help manage creating and deleting files in a directory. You can create a file, delete a file, or delete all txt files in the directory. Keep responses under 30 words.",
+            instructions="This assistant can help you manage reminders and provide information about the current date and time.",
             tools=self.tools,
-            model="gpt-3.5-turbo"
+            model="gpt-3.5-turbo",
         )
 
         self.thread = self.client.beta.threads.create()
@@ -63,7 +63,7 @@ class Assistant():
         continue_conversation = True
         run = self.wait_on_run(run, self.thread)
         # print("waited on run 1", run.status)
-        if run.status == "requires_action":
+        while run.status == "requires_action":
             tool_call = run.required_action.submit_tool_outputs.tool_calls[0]
             name = tool_call.function.name
             arguments = json.loads(tool_call.function.arguments)
@@ -73,12 +73,14 @@ class Assistant():
             response = None
 
             match name:
-                case "create_text_file":
-                    response = fh.create_text_file(str(arguments['file_name']), str(arguments.get('content', '')))
-                case "delete_file":
-                    response = fh.delete_file(arguments['file_name'])
-                case "delete_all_txt_files":
-                    response = fh.delete_all_txt_files()
+                case "list_reminders":
+                    response = fh.list_reminders()
+                case "add_reminder":
+                    fh.add_reminder(arguments['reminder_text'])
+                    response = "Reminder added."
+                case "remove_reminder":
+                    fh.remove_reminder(arguments['reminder_text'])
+                    response = "Reminder removed."
                 case "finish_conversation":
                     continue_conversation = fh.finish_conversation(arguments['value'])
                     response = "Goodbye!"
@@ -100,8 +102,8 @@ class Assistant():
                 ],
             )
 
-        run = self.wait_on_run(run, self.thread)
-        # print("waited on run 2", run.status)
+            run = self.wait_on_run(run, self.thread)
+            # print("waited on run 2", run.status)
 
         messages = self.client.beta.threads.messages.list(
             self.thread.id,
