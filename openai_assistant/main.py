@@ -34,7 +34,7 @@ def live_recording(threshold=0.001, silence_wait_time=30):
     frames_since_sound = 0
     continue_listening = True
     try:
-        print("Hello! I'm listening. Speak to me.")
+        print("Hello! I will start listening soon, wait for the loop of numbers to start.")
         while continue_listening:
             data = stream.read(CHUNK, exception_on_overflow=False)
             np_data = np.frombuffer(data, dtype=np.int16).astype(
