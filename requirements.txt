@@ -1,0 +1,9 @@
+openai
+python-dotenv
+numpy
+pyaudio
+librosa
+openai-whisper
+pyttsx3
+setuptools
+pytz

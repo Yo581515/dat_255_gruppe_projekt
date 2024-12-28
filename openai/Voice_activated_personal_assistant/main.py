@@ -74,4 +74,5 @@ def live_recording(threshold=0.001, silence_wait_time=30):
         p.terminate()
 
 
-live_recording()
+if __name__ == "__main__":
+    live_recording()

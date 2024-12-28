@@ -1,0 +1,7 @@
+#my enviroment name 
+open_ai_assistant_env
+open_ai_assistant_env/
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+__pycache__/
